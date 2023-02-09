@@ -1,0 +1,23 @@
+{
+  "name": "Todquest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "fast-two-sms": "^3.0.0",
+    "mongoose": "^6.1.5",
+    "morgan": "^1.10.0",
+    "springedge": "^1.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
