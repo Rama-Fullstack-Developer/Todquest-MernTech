@@ -1,19 +1,29 @@
-let n = 6;
+<!DOCTYPE html>
+<html>
+<body>
 
-for (let i = 1; i <= n; i++) {
-  // printing stars and spaces
-  for (let j = 0; j < i; j++) {
-    if(i === n) {
-      process.stdout.write('*')
-    }
-    else {
-      if (j == 0 || j == i - 1) {
-        process.stdout.write('*')
-      }
-      else {
-        process.stdout.write(' ')
+<h2>JavaScript pattern</h2>
+
+
+<p id="demo"></p>
+
+<script>
+var row = 5
+for (i = 1; i <= row; i++) {
+  for (j = 1; j < i; j++) {
+    document.write("&nbsp;&nbsp;");
+  } {
+    for (j = 1; j <= (row * 2 - (2 * i - 1)); j++) {
+      if (i == 1 || j == 1 || j == (row * 2 - (2 * i - 1))) {
+        document.write("*");
+      } else {
+        document.write("&nbsp;&nbsp;");
       }
     }
   }
-  console.log();
+  document.write("<br/>")
 }
+</script>
+
+</body>
+</html>
