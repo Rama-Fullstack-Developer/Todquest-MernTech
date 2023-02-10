@@ -17,6 +17,33 @@ const getStudents = (req, res, next) => {
             })
         })
 }
+const createWorksnapsTimeEntry = (req, res, next) => {
+try {
+    var time_entries;
+    const _addWorksnapsTimeEntry = Student.findByIdAndUpdate({
+      '_id': req.params._sId,
+    },
+      {
+        $push: {
+          'WorksnapsTimeEntry': {
+            'student': req.body.student,
+            'time_entries': req.body.time_entries
+          }
+        }
+      }, { new: true }
+    );
+    if (_addWorksnapsTimeEntry) {
+        time_entries = { status: true, message: 'Success', data: _addWorksnapsTimeEntry };
+    } else {
+        time_entries = { status: false, message: 'Time_entries added failed' };
+    }
+    return time_entries;
+  }
+  catch (e) {
+    console.log(e);
+    next();
+  }
+}
 
 const createStudent = (req, res, next) => {
 
@@ -25,13 +52,9 @@ const createStudent = (req, res, next) => {
         lastName: req.body.lastName,
         displayName: req.body.displayName,
         municipality: req.body.municipality,
-        WorksnapsTimeEntry: {
-            student: req.body.student,
-            time_entries: req.body.time_entries
-        }
     })
     console.log(student)
-    student.save()
+    student.save() 
         .then(response => {
             res.json({
                 message: 'Student Added Successfully'
@@ -44,5 +67,5 @@ const createStudent = (req, res, next) => {
         })
 }
 module.exports = {
-    getStudents, createStudent
+    getStudents, createStudent,createWorksnapsTimeEntry
 }
