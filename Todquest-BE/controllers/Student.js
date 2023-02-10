@@ -5,8 +5,8 @@ const Student = require('../models/Student')
 const getStudents = (req, res, next) => {
     Student.find()
         .then(response => {
-            let entries=[];
-           let data= response.map(st=>entries.push(st.entries));
+            let entries = [];
+            let data = response.map(st => entries.push(st.entries));
             res.json({
                 data
             })
@@ -18,31 +18,23 @@ const getStudents = (req, res, next) => {
         })
 }
 const createWorksnapsTimeEntry = (req, res, next) => {
-try {
-    var time_entries;
-    const _addWorksnapsTimeEntry = Student.findByIdAndUpdate({
-      '_id': req.params._sId,
+    console.log(req.params.id)
+    Student.findByIdAndUpdate({
+        '_id': req.params.id,
     },
-      {
-        $push: {
-          'WorksnapsTimeEntry': {
-            'student': req.body.student,
-            'time_entries': req.body.time_entries
-          }
-        }
-      }, { new: true }
+        {
+            $push:
+            {
+                'WorksnapsTimeEntry': {
+                    'student': req.body.student,
+                    'time_entries': req.body.time_entries
+                }
+            }
+        }, { new: true }
     );
-    if (_addWorksnapsTimeEntry) {
-        time_entries = { status: true, message: 'Success', data: _addWorksnapsTimeEntry };
-    } else {
-        time_entries = { status: false, message: 'Time_entries added failed' };
-    }
-    return time_entries;
-  }
-  catch (e) {
-    console.log(e);
-    next();
-  }
+    res.json({
+        message: 'Student entries Added Successfully',
+    })
 }
 
 const createStudent = (req, res, next) => {
@@ -54,7 +46,7 @@ const createStudent = (req, res, next) => {
         municipality: req.body.municipality,
     })
     console.log(student)
-    student.save() 
+    student.save()
         .then(response => {
             res.json({
                 message: 'Student Added Successfully'
@@ -67,5 +59,5 @@ const createStudent = (req, res, next) => {
         })
 }
 module.exports = {
-    getStudents, createStudent,createWorksnapsTimeEntry
+    getStudents, createStudent, createWorksnapsTimeEntry
 }

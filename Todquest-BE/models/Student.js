@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 
-const WorksnapsTimeEntry = {
+const WorksnapsTimeEntry = [{
     student: {
         type: Schema.ObjectId,
         ref: 'Student'
@@ -10,7 +10,7 @@ const WorksnapsTimeEntry = {
     time_entries: {
         type: Object
     }
-};
+}];
 
 const StudentSchema = new Schema({
     firstName: {
